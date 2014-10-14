@@ -4,22 +4,28 @@ package kata3;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MainReader {
+public class MailReader {
     private final String filepath;
 
-    public MainReader(String filpath) {
+    public MailReader(String filpath) {
         this.filepath = filpath;
     }
     public String[] readDomains(){
         ArrayList<String> domainList= new ArrayList<>();
         try {
-            BufferedReader read = new BufferedReader(new FileReader (filepath));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainReader.class.getName()).log(Level.SEVERE, null, ex);
+            BufferedReader reader = new BufferedReader(new FileReader (filepath));
+            while(true){
+                String line= reader.readLine();
+                if(line==null) break;
+                domainList.add(line.split("@")[1]);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(MailReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return domainList.toArray(new String [domainList.size()]);
     }
