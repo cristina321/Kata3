@@ -21,7 +21,7 @@ public class MainReader {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainReader.class.getName()).log(Level.SEVERE, null, ex);
         }
-                return null;
+        return domainList.toArray(new String [domainList.size()]);
     }
     
     
